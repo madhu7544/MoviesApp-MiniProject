@@ -41,20 +41,19 @@ class Home extends Component {
     const response = await fetch(homeApi, options)
 
     if (response.ok === true) {
-      const homePageData = await response.json()
-      const lengthOfData = homePageData.results.length
-      const randomPoster =
-        homePageData.results[Math.floor(Math.random() * lengthOfData)]
+      const data = await response.json()
+      const fetchedData = data.results.map(eachMovie => ({
+        id: eachMovie.id,
+        backdropPath: eachMovie.backdrop_path,
+        title: eachMovie.title,
+        overview: eachMovie.overview,
+        posterPath: eachMovie.poster_path,
+      }))
+      const randomNumber = Math.floor(Math.random() * fetchedData.length)
 
-      const updatedData = {
-        id: randomPoster.id,
-        backdropPath: randomPoster.backdrop_path,
-        title: randomPoster.title,
-        overview: randomPoster.overview,
-        posterPath: randomPoster.poster_path,
-      }
+      const randomMovie = fetchedData[randomNumber]
       this.setState({
-        randomHomePagePoster: {...updatedData},
+        randomHomePagePoster: randomMovie,
         apiStatus: apiStatusConstants.success,
       })
     } else {
@@ -74,8 +73,9 @@ class Home extends Component {
 
   renderSuccessView = () => {
     const {randomHomePagePoster} = this.state
-    const {title, backdropPath, overview} = randomHomePagePoster
 
+    const {title, backdropPath, overview} = randomHomePagePoster
+    console.log(title)
     return (
       <div
         style={{backgroundImage: `url(${backdropPath})`}}
@@ -85,7 +85,7 @@ class Home extends Component {
         <div className="home-page-movie-container">
           <h1 className="movie-title">{title}</h1>
           <h1 className="over-view">{overview}</h1>
-          <button type="button" className="play-btn" testid="searchButton">
+          <button type="button" className="play-btn">
             Play
           </button>
         </div>

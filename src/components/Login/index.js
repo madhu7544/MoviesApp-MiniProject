@@ -74,7 +74,7 @@ class Login extends Component {
           className="input-field"
           type="text"
           id="username"
-          placeholder="Username"
+          placeholder="rahul"
         />
       </>
     )
@@ -94,7 +94,7 @@ class Login extends Component {
           className="input-field"
           type="password"
           id="password"
-          placeholder="Password"
+          placeholder="rahul@2021"
         />
       </>
     )
