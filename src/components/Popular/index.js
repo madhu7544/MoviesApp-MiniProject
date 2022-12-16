@@ -61,7 +61,6 @@ class Popular extends Component {
             <MovieDetailsLink movieDetails={eachMovie} key={eachMovie.id} />
           ))}
         </ul>
-        <Footer />
       </>
     )
   }
@@ -94,6 +93,7 @@ class Popular extends Component {
       <div className="popular-container">
         <Header />
         {this.renderPopularPageView()}
+        <Footer />
       </div>
     )
   }
